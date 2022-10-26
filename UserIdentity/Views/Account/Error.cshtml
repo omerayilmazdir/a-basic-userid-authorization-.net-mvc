@@ -1,0 +1,13 @@
+﻿@model string[]
+@{
+    ViewBag.Title = "Error";
+}
+
+<div class="panel panel-danger">
+    @foreach (var err in Model)
+    {
+    <div class="alert alert-danger">@err</div>
+
+    }
+</div>
+

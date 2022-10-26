@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Roller
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        <!-- eğer model in içerisine gönderilenler 0 a eşit ise satırları birleştir-->
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="3">Rol Yok</td>
+            </tr>
+        }
+        // dolu ise ıd ve adını eşitle
+        else
+        {
+            foreach (var item in Model)
+            {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>
+                <!-- 1. parametre isim, 2. parametre hangi controller olduğu-->
+                @using (Html.BeginForm("Delete", "RoleAdmin", new { id = item.Id }))
+                {
+                    @Html.ActionLink("Güncelle", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                }
+
+            </td>
+        </tr>
+        }
+        }
+
+    </table>
+</div>
